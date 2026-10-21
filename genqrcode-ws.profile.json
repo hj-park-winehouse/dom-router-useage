@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "profileId": "review-genqrcode-ws",
+  "revision": 1,
+  "engineMajor": 1,
+  "name": "Review · GenQRCode → Python WS",
+  "description": "Public example.com URL only. Routes a diagnostic event to the separate Python review receiver; no business submissions.",
+  "enabled": false,
+  "channel": "demo",
+  "carrier": "GENERIC",
+  "connectionRef": "local-ws-demo",
+  "origins": [
+    "https://genqrcode.com"
+  ],
+  "flows": [
+    {
+      "id": "observe-generated-qr",
+      "name": "QR 생성 요청 → SVG 성공 확인 → URL 전달",
+      "source": {
+        "type": "network.exchange",
+        "origin": "https://genqrcode.com",
+        "method": "POST",
+        "path": "/preview",
+        "capture": [
+          "xhr",
+          "fetch"
+        ],
+        "requestCodec": "json-object",
+        "responseCodec": "svg-metadata",
+        "requestFields": [
+          {
+            "name": "qrUrl",
+            "pointer": "/text",
+            "kind": "string",
+            "maxLength": 2048
+          },
+          {
+            "name": "qrType",
+            "pointer": "/type",
+            "kind": "string-or-number",
+            "maxLength": 4
+          }
+        ],
+        "requestTests": [
+          {
+            "from": "/request/qrType",
+            "operator": "equals",
+            "value": 0
+          }
+        ],
+        "responseFields": [
+          {
+            "name": "generated",
+            "pointer": "/generated",
+            "kind": "boolean"
+          },
+          {
+            "name": "imageFormat",
+            "pointer": "/format",
+            "kind": "string",
+            "maxLength": 8
+          }
+        ],
+        "maxResponseBytes": 262144
+      },
+      "steps": [
+        {
+          "id": "check-generation",
+          "type": "guard.fields",
+          "tests": [
+            {
+              "from": "/httpStatus",
+              "operator": "equals",
+              "value": 200
+            },
+            {
+              "from": "/response/generated",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "from": "/request/qrUrl",
+              "operator": "present",
+              "value": true
+            }
+          ],
+          "errorCode": "QR_GENERATION_NOT_SUCCESSFUL"
+        },
+        {
+          "id": "read-generated-url",
+          "type": "extract.fields",
+          "fields": [
+            {
+              "name": "qrUrl",
+              "from": "/request/qrUrl"
+            },
+            {
+              "name": "imageFormat",
+              "from": "/response/imageFormat"
+            }
+          ]
+        },
+        {
+          "id": "emit-generated-url",
+          "type": "emit.event",
+          "eventType": "diagnostic.observed",
+          "bindings": {
+            "/qrUrl": "/vars/qrUrl",
+            "/imageFormat": "/vars/imageFormat",
+            "/generated": "/response/generated"
+          }
+        }
+      ]
+    }
+  ]
+}

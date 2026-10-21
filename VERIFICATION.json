@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-21",
+  "receiverVersion": "1.0.0",
+  "pythonTested": "3.12.14",
+  "automatedServerTests": {
+    "passed": 10,
+    "cases": [
+      "HTTP/WS durable storage",
+      "idempotency and conflicting IDs",
+      "WS reconnect",
+      "CORS and Host/Origin guards",
+      "invalid JSON, types, encodings and oversize rejection",
+      "production and live-auth URL rejection",
+      "dashboard clear protection",
+      "durable reopen, TTL and count limits",
+      "dashboard and importable profiles"
+    ]
+  },
+  "shippedExtensionContractTests": {
+    "passed": [
+      "HTTP",
+      "WS"
+    ],
+    "method": "Actual DOM Router engine and transport modules from Node, not a Chrome UI test"
+  },
+  "profileValidation": {
+    "passed": 3,
+    "engine": "Actual DOM Router profile schema and semantic validator"
+  },
+  "realChrome": {
+    "passed": true,
+    "site": "https://genqrcode.com/ko",
+    "action": "User applied existing GenQRCode profile to the Python receiver; agent clicked actual QR generation",
+    "transport": "ws",
+    "profileRevision": 2,
+    "storedPayload": {
+      "generated": true,
+      "imageFormat": "svg",
+      "qrUrl": "https://example.com/dom-router-python-review-20261021"
+    }
+  },
+  "scope": "Public examples and synthetic data only. No production business verification, no external forwarding. HTTP browser end-to-end has not been asserted; HTTP engine/transport and server tests passed.",
+  "freshArchiveInstall": {
+    "passed": true,
+    "platform": "Windows x64",
+    "python": "3.11.9",
+    "method": "ZIP extracted into a clean directory containing spaces; start.cmd --port 19495 created its own venv, installed requirements and returned HTTP 200 health on loopback",
+    "defaultPortRemainedRunning": 19494
+  }
+}

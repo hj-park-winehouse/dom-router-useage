@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:11,067
+DOM Router routes selected web-page data to a local program. This walkthrough uses the actual panel HTML with sample data.
+
+2
+00:00:11,267 --> 00:00:21,067
+Start your local receiver, then open Connections, enter its address and click Connect.
+
+3
+00:00:21,267 --> 00:00:34,009
+Browse Templates and inspect an example. Public examples and business profiles are provided. Importing a template does not start monitoring.
+
+4
+00:00:34,209 --> 00:00:45,856
+Click Import as profile, choose a name and a connection matching the template, then create a draft.
+
+5
+00:00:46,056 --> 00:01:01,156
+The flow is divided into detection, validation, extraction, event and delivery blocks. Select a block to inspect and edit its fields in the form.
+
+6
+00:01:01,356 --> 00:01:15,563
+Save, then click Apply / reload. Saving and applying are separate operations. The real extension also requests access to the selected site and local receiver.
+
+7
+00:01:15,763 --> 00:01:33,596
+This HTML preview passes a synthetic event through the shared engine and a real local WebSocket. Inspect the selected URL in Execution logs. Transport completion is separate from receiver-side business completion.
+
+8
+00:01:33,796 --> 00:01:40,000
+Connect, configure, save and apply, then inspect the logs. This video was assembled from the actual panel HTML with synthetic data. No real business job was submitted.

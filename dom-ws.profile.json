@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "profileId": "review-dom-ws",
+  "revision": 1,
+  "engineMajor": 1,
+  "name": "Review · DOM → WS",
+  "description": "Local synthetic DOM data only. No business submissions.",
+  "enabled": false,
+  "channel": "demo",
+  "carrier": "GENERIC",
+  "connectionRef": "local-ws-demo",
+  "origins": [
+    "http://127.0.0.1:19494"
+  ],
+  "flows": [
+    {
+      "id": "read-review-ws",
+      "name": "Click → read → send",
+      "source": {
+        "type": "dom.event",
+        "origin": "http://127.0.0.1:19494",
+        "event": "click",
+        "selector": "#send-ws",
+        "requireTrustedClick": true,
+        "reads": [
+          {
+            "name": "document-id",
+            "selector": "#document-id",
+            "read": "value",
+            "maxLength": 100
+          },
+          {
+            "name": "recipient",
+            "selector": "#recipient",
+            "read": "text",
+            "maxLength": 200
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "read-fields",
+          "type": "extract.fields",
+          "fields": [
+            {
+              "name": "documentId",
+              "from": "/dom/document-id"
+            },
+            {
+              "name": "recipient",
+              "from": "/dom/recipient"
+            }
+          ]
+        },
+        {
+          "id": "emit-review",
+          "type": "emit.event",
+          "eventType": "diagnostic.observed",
+          "bindings": {
+            "/documentId": "/vars/documentId",
+            "/recipient": "/vars/recipient"
+          }
+        }
+      ]
+    }
+  ]
+}

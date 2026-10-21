@@ -1,0 +1,3 @@
+No extension login is required. Setup, receiver Python source/download, and videos with English subtitles: https://hj-park-winehouse.github.io/dom-router-useage/
+Start receiver, connect to its local URL, import/apply the example profile, generate a QR on GenQRCode, then check stored events. Business templates require authorized site accounts; see scope notes.
+한영 사용법·수신부 소스·영문 자막 영상은 위 링크에 있습니다.

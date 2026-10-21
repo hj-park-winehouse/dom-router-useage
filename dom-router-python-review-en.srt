@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:16,983
+DOM Router captures the user-initiated generation request, validates its response and delivers the selected URL to a local receiver. This first view is an explanatory HTML diagram.
+
+2
+00:00:17,133 --> 00:00:33,283
+Start the Python receiver and open its local dashboard. In the extension, connect to the displayed WebSocket URL and apply the GenQRCode profile. No pairing key or business login is needed.
+
+3
+00:00:33,433 --> 00:00:48,017
+Enter the public example URL on the real GenQRCode website, then click Generate QR Code. No personal information or live authentication link is used.
+
+4
+00:00:48,167 --> 00:01:02,683
+When the site generates the QR, the extension checks the request URL and valid SVG response. This example reads the URL from the request; it does not decode the QR image.
+
+5
+00:01:02,833 --> 00:01:20,483
+Check the Python dashboard for the same URL, event ID and received timestamp. The actual extension delivered this event over WebSocket and the receiver committed it to SQLite. No external business job is submitted.
