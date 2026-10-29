@@ -21,7 +21,7 @@
     const changed=id!==active;active=id;
     docs.forEach(d=>d.hidden=d.dataset.doc!==id);
     $$('#sidebar a[data-page]').forEach(a=>{if(a.dataset.page===id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-    document.title=translated($('[data-page="'+id+'"]'))+' | DOM Router Docs';
+    document.title=translated($('[data-page="'+id+'"]'))+' | DoriDori Docs';
     document.body.classList.remove('menu-open');$('#menu').setAttribute('aria-expanded','false');
     headings();
     if(anchor)document.getElementById(anchor)?.scrollIntoView();else if(changed||focus)window.scrollTo(0,0);
